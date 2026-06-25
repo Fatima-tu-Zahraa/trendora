@@ -64,9 +64,12 @@ export function ProductProvider({ children }) {
   const removeFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id))
   }
+  const updateProduct = (id, updatedData) => {
+  setProducts(products.map((p) => p.id === id ? { ...p, ...updatedData } : p))
+ }
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, removeProduct, cart, addToCart, increaseQty, decreaseQty, removeFromCart }}>
+    <ProductContext.Provider value={{ products, addProduct, removeProduct, updateProduct, cart, addToCart, increaseQty, decreaseQty, removeFromCart }}>
       {children}
     </ProductContext.Provider>
   )
