@@ -1,16 +1,34 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import { auth } from "../firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 function Signup() {
   const navigate = useNavigate()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault()
-    navigate("/dashboard")
+    setError("")
+    setLoading(true)
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      navigate("/dashboard")
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        setError("Email already in use. Please login instead.")
+      } else if (err.code === "auth/weak-password") {
+        setError("Password should be at least 6 characters.")
+      } else {
+        setError("Something went wrong. Please try again.")
+      }
+    }
+    setLoading(false)
   }
 
   return (
@@ -21,21 +39,22 @@ function Signup() {
         transition={{ duration: 0.5 }}
         className="bg-white p-8 sm:p-10 rounded-2xl shadow-xl w-full max-w-md border border-gray-100"
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Link to="/" className="text-2xl font-bold text-purple-600 block text-center mb-6">
-            Trendora
-          </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-2">
-            Create Account
-          </h1>
-          <p className="text-gray-500 text-sm text-center mb-8">
-            Sign up to start managing your store
-          </p>
-        </motion.div>
+        <Link to="/" className="text-2xl font-bold text-purple-600 block text-center mb-6">
+          Trendora
+        </Link>
+
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-2">
+          Create Account
+        </h1>
+        <p className="text-gray-500 text-sm text-center mb-8">
+          Sign up to start managing your store
+        </p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg p-3 mb-4">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSignup} className="space-y-4">
           <motion.div
@@ -49,6 +68,7 @@ function Signup() {
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
               className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
             />
           </motion.div>
@@ -64,6 +84,7 @@ function Signup() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
               className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
             />
           </motion.div>
@@ -76,9 +97,10 @@ function Signup() {
             <label className="text-sm font-medium text-gray-700 mb-1 block">Password</label>
             <input
               type="password"
-              placeholder="••••••••"
+              placeholder="Min 6 characters"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
               className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
             />
           </motion.div>
@@ -87,23 +109,19 @@ function Signup() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
-            className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            disabled={loading}
+            className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-60"
           >
-            Sign Up
+            {loading ? "Creating account..." : "Sign Up"}
           </motion.button>
         </form>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="text-center text-sm text-gray-500 mt-6"
-        >
+        <p className="text-center text-sm text-gray-500 mt-6">
           Already have an account?{" "}
           <Link to="/login" className="text-purple-600 font-semibold hover:underline">
             Login
           </Link>
-        </motion.p>
+        </p>
       </motion.div>
     </div>
   )
