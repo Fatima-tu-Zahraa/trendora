@@ -72,30 +72,45 @@ function Contact() {
           onSubmit={handleSubmit}
           className="space-y-4 text-left"
         >
+          <label htmlFor="name" className="sr-only">Your Name</label>
           <input
+            id="name"
             type="text"
             name="name"
             placeholder="Your Name"
+            autoComplete="name"
             required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
           />
+
+          <label htmlFor="email" className="sr-only">Your Email</label>
           <input
+            id="email"
             type="email"
             name="email"
             placeholder="Your Email"
+            autoComplete="email"
             required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
           />
+
+          <label htmlFor="title" className="sr-only">Subject</label>
           <input
+            id="title"
             type="text"
             name="title"
             placeholder="Subject"
+            autoComplete="off"
             required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"
           />
+
+          <label htmlFor="message" className="sr-only">Your Message</label>
           <textarea
+            id="message"
             name="message"
             placeholder="Your Message"
+            autoComplete="off"
             rows="5"
             required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"

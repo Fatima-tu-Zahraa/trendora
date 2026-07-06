@@ -1,16 +1,62 @@
-# React + Vite
+# 🛍️ Trendora — E-Commerce Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Trendora is a full-featured e-commerce web application built with React and Firebase. It includes real authentication, product management (CRUD), a shopping cart, and a protected admin dashboard — built as a portfolio project to demonstrate modern frontend development skills.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [trendora-orcin.vercel.app](https://trendora-orcin.vercel.app)
+📂 **GitHub:** [github.com/Fatima-tu-Zahraa/trendora](https://github.com/Fatima-tu-Zahraa/trendora)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔐 **Authentication** — Signup, Login, Logout, and Forgot Password using Firebase Auth
+- 🛡️ **Protected Routes** — Dashboard is only accessible to logged-in users
+- 📦 **Product Management (CRUD)** — Create, read, update, and delete products
+- 🛒 **Shopping Cart** — Add products with images and quantity, persisted via LocalStorage
+- 📊 **Dashboard** — KPIs, recent products, and quick actions for admin use
+- ✉️ **Contact Form** — Sends real emails using EmailJS
+- 🎬 **Animations** — Smooth transitions and effects with Framer Motion
+- 📱 **Fully Responsive** — Optimized for mobile, tablet, and desktop
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js, Tailwind CSS
+- **Routing:** React Router
+- **State Management:** Context API
+- **Authentication:** Firebase Authentication
+- **Email Service:** EmailJS
+- **Animations:** Framer Motion
+- **Storage:** LocalStorage
+- **Deployment:** Vercel
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/Fatima-tu-Zahraa/trendora.git
+cd trendora
+npm install
+npm run dev
+```
+
+---
+
+## 📌 Roadmap
+
+- [ ] Add order history for users
+- [ ] Add payment gateway integration
+- [ ] Add product search and filtering
+
+---
+
+## 👩‍💻 Author
+
+**Fatima-tu-Zahraa**
+Frontend Developer | React & Tailwind CSS
+
+[GitHub](https://github.com/Fatima-tu-Zahraa)
