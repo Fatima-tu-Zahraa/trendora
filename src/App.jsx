@@ -13,6 +13,7 @@ import DashboardHome from "./pages/Dashboard/DashboardHome"
 import ProductList from "./pages/Dashboard/ProductList"
 import Cart from "./pages/Dashboard/Cart"
 import CreateProduct from "./pages/Dashboard/CreateProduct"
+import ProtectedRoute from "./ProtectedRoute"
 
 function App() {
   const location = useLocation()
@@ -30,12 +31,19 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-       <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<DashboardHome />} />
           <Route path="products" element={<ProductList />} />
           <Route path="create-product" element={<CreateProduct />} />
           <Route path="cart" element={<Cart />} />
-       </Route>
+        </Route>
       </Routes>
       {!isDashboard && !isLogin && <Footer />}
     </div>

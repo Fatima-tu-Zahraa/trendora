@@ -2,18 +2,20 @@ import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { auth } from "../firebase"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"
 
 function Login() {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {
     e.preventDefault()
     setError("")
+    setSuccess("")
     setLoading(true)
     try {
       await signInWithEmailAndPassword(auth, email, password)
@@ -22,6 +24,21 @@ function Login() {
       setError("Invalid email or password. Please try again.")
     }
     setLoading(false)
+  }
+
+  const handleForgotPassword = async () => {
+    setError("")
+    setSuccess("")
+    if (!email) {
+      setError("Please enter your email first.")
+      return
+    }
+    try {
+      await sendPasswordResetEmail(auth, email)
+      setSuccess("Password reset email sent! Check your inbox.")
+    } catch (err) {
+      setError("Email not found. Please check and try again.")
+    }
   }
 
   return (
@@ -46,6 +63,12 @@ function Login() {
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg p-3 mb-4">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-600 text-sm rounded-lg p-3 mb-4">
+            {success}
           </div>
         )}
 
@@ -83,9 +106,13 @@ function Login() {
           </motion.div>
 
           <div className="flex justify-end">
-            <a href="#" className="text-sm text-purple-600 hover:underline">
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              className="text-sm text-purple-600 hover:underline"
+            >
               Forgot password?
-            </a>
+            </button>
           </div>
 
           <motion.button
