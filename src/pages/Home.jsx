@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 
 function Home() {
   return (
@@ -21,16 +22,18 @@ function Home() {
         >
           Your one-stop destination for everything you love
         </motion.p>
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-purple-700 transition"
-        >
-          Shop Now
-        </motion.button>
+        <Link to="/login">
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-purple-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-purple-700 transition"
+          >
+            Shop Now
+          </motion.button>
+        </Link>
       </section>
 
       {/* Why Choose Section */}
@@ -99,8 +102,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-12 sm:py-16 px-4 max-w-2xl mx-auto text-center">
+      {/* CTA Section */}
+      <section className="py-12 sm:py-16 px-4 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +111,7 @@ function Home() {
           viewport={{ once: true }}
           className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3"
         >
-          Get In Touch
+          Ready to Start Shopping?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -117,30 +120,34 @@ function Home() {
           viewport={{ once: true }}
           className="text-gray-600 text-sm sm:text-base mb-8"
         >
-          Have a question? We'd love to hear from you.
+          Join thousands of happy customers today!
         </motion.p>
-        <motion.form
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="space-y-4"
+          className="flex flex-wrap gap-4 justify-center"
         >
-          <input type="text" placeholder="Your Name"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base" />
-          <input type="email" placeholder="Your Email"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base" />
-          <textarea placeholder="Your Message" rows="4"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm sm:text-base"></textarea>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full sm:w-auto"
-          >
-            Send Message
-          </motion.button>
-        </motion.form>
+          <Link to="/signup">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Create Account
+            </motion.button>
+          </Link>
+          <Link to="/contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition"
+            >
+              Contact Us
+            </motion.button>
+          </Link>
+        </motion.div>
       </section>
     </div>
   )
